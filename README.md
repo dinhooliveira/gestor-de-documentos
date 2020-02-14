@@ -1,9 +1,9 @@
-#SISYOURFILE
-###REQUIRED
+#SISYOURFILE<br>
+###REQUIRED<br>
 php >=7.2<br>
 mysql >= 5.7<br>
-composer 
+composer<br>
 
-###INSTALL
-####CONFIG
+###INSTALL<br>
+####CONFIG<br>
 
