@@ -1,0 +1,41 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    background: #6a4394;
+}
+
+fieldset{
+    margin: 90px;
+    color: #fff;
+    font-size: 25px;
+}
+
+strong{
+    color:#000;
+}
+
+.title-page {
+    text-align: center;
+    color: #fff;
+    font-size: 70px;
+}
+.btn-home{
+    position: fixed;
+    left: 5px;
+    top: 5px;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.btn-logout{
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.btn-home img,.btn-logout img{
+    width: 50px;
+    border-radius: 50%;
+}
