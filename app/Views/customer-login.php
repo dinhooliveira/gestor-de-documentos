@@ -10,7 +10,7 @@
 <body>
 
 <div class="card-login">
-    <div class="card-login-title"><h1>CUSTOMER LOGIN</h1></div>
+    <div class="card-login-title"><h1><?=lang('Login.customerTitle')?></h1></div>
     <form action="<?= base_url('CustomerLogin/login') ?>" method="post">
         <label>E-mail</label>
         <input type="text" name="email" value="<?= old('email') ?>" required>
