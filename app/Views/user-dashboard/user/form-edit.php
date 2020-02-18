@@ -24,6 +24,7 @@
         <label><?= lang('User.fieldConfEmail') ?></label>
         <input type="email" name="cemail" value="<?= $user->email ?>">
         <input type="hidden" name="id" value="<?= $user->id ?>">
+        <?= csrf_field() ?>
         <button class="button-send"><img src="<?=base_url('icons/update.png')?>"/></button>
         <?php
         if (!empty($erros)) {

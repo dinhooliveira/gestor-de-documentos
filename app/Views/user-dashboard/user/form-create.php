@@ -21,6 +21,7 @@
         <input type="email" name="email" value="<?= old('email') ?>">
         <label><?=lang('User.fieldConfEmail')?></label>
         <input type="email" name="cemail" value="<?= old('cemail') ?>">
+        <?= csrf_field() ?>
         <button class="button-send"><img src="<?=base_url('icons/save.png')?>"/></button>
 
 

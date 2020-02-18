@@ -10,13 +10,21 @@
 <body>
 
 <div class="card-login">
-    <div class="card-login-title"><h1><?=lang('Login.userTitle')?></h1></div>
+    <div class="card-login-title"><h1><?= lang('Login.userTitle') ?></h1></div>
     <form action="<?= base_url('UserLogin/login') ?>" method="post">
+        <?php if (!empty($messageInfo)): ?>
+            <div class="message-info">
+                <?= $messageInfo ?>
+            </div>
+        <?php endif; ?>
         <label>E-mail</label>
-        <input type="text" name="email" value="<?= old('email') ?>" required>
+        <input type="text" name="email" value="<?= old('email') ?>" required/>
         <label>Password</label>
-        <input type="password" name="password" value="<?= old('password') ?>" required>
+        <input type="password" name="password" value="<?= old('password') ?>" required/>
+        <?= csrf_field() ?>
         <button>Login</button>
+
+        <a class="forgot-password" href="<?= $linkForgotPassword ?>"><?=lang('Login.defaultForgotPassword')?></a>
         <div class="message">
             <?= empty($message) ? '' : $message ?>
         </div>

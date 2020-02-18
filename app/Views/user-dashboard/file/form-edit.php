@@ -37,7 +37,7 @@
             endif;
             ?>
         </select>
-
+        <?= csrf_field() ?>
         <button class="button-send"><img src="<?=base_url('icons/update.png')?>"/></button>
         <?php
         if (!empty($erros)) {

@@ -5,7 +5,7 @@ class UserModel extends \CodeIgniter\Model
 
     protected $table      = 'user';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email','password'];
+    protected $allowedFields = ['name', 'email','password','forgot_password'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

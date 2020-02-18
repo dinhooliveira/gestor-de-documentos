@@ -16,6 +16,19 @@ class Customer extends Entity
         return $this;
     }
 
+    public function clearForgotPassword(){
+        $this->attributes['forgot_password'] = null;
+        return $this;
+    }
+
+    public function setForgotPassword($string=null){
+        if(empty($string)){
+            throw new \Exception("Esqueci a Senha não pode ser em branco");
+        }
+        $this->attributes['forgot_password'] = hash("SHA256",$string, false);
+        return $this;
+    }
+
     function getCreatedAt($lang=null){
         return  \Util::formatDate($lang,$this->attributes['created_at']);
     }

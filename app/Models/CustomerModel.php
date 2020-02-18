@@ -5,7 +5,7 @@ class CustomerModel extends \CodeIgniter\Model
 
     protected $table      = 'customer';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email','password'];
+    protected $allowedFields = ['name', 'email','password','forgot_password'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

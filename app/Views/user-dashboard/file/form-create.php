@@ -35,6 +35,7 @@
             endif;
             ?>
         </select>
+        <?= csrf_field() ?>
         <button class="button-send"><img src="<?=base_url('icons/save.png')?>"/></button>
 
 

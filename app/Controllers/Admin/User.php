@@ -14,7 +14,6 @@ class User extends \App\Controllers\BaseController
     {
         \Security::auth();
         $this->session = \Config\Services::session();
-        $this->request = \Config\Services::request();
         $this->UserModel = new UserModel();
     }
 

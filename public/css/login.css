@@ -32,3 +32,21 @@ html,body{
 .message{
     color:red
 }
+
+.forgot-password{
+    float: right;
+    text-decoration: none;
+    color: #084665;
+}
+
+.forgot-password:hover{
+    color: #6a4394;
+}
+
+.message-info{
+    color:white;
+    background: #3ad4cdcc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+}

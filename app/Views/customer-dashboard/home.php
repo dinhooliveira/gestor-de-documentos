@@ -28,8 +28,8 @@
         <tr>
 
             <th>Nome</th>
-            <th>Tamanho</th>
             <th>Tipo</th>
+            <th>Tamanho</th>
             <th>Data Criação</th>
             <th>Data Atualização</th>
             <th>Ação</th>
@@ -39,14 +39,18 @@
         <?php
         if (!empty($files)) :
             foreach ($files as $file) :
-                $fileRec = new \CodeIgniter\Files\File(WRITEPATH."uploads/".$file->file_location);
+                $pathFile = WRITEPATH . "uploads/" . $file->file_location;
+                if (file_exists($pathFile)) {
+                    $fileRec = new \CodeIgniter\Files\File($pathFile);
+                }
+
                 ?>
                 <tr>
                     <td><?= $file->name ?></td>
-                    <td><?=$fileRec->getExtension()?></td>
-                    <td><?=$fileRec->getSize('MB')?>(MB)</td>
-                    <td><?= \Util::formatDate(getenv('app.defaultLocale'),$file->created_at) ?></td>
-                    <td><?= \Util::formatDate(getenv('app.defaultLocale'),$file->updated_at) ?></td>
+                    <td><?= $fileRec ? $fileRec->getExtension() : '' ?></td>
+                    <td><?= $fileRec ? $fileRec->getSize('MB') : '' ?>(MB)</td>
+                    <td><?= \Util::formatDate(getenv('app.defaultLocale'), $file->created_at) ?></td>
+                    <td><?= \Util::formatDate(getenv('app.defaultLocale'), $file->updated_at) ?></td>
                     <td>
                         <a class="btn-action" href="<?= base_url("/customer/download/{$file->id}") ?>"><img
                                     src="<?= base_url('icons/download.png') ?>"/></a>
