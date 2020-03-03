@@ -78,29 +78,29 @@ $routes->get('/', 'Login::index');
 /**
  * ADMIN
  */
-$routes->get('/admin/home/', 'App\Controllers\Admin\Home::index');
+$routes->get('/admin/home/', '\App\Controllers\Admin\Home::index');
 
-$routes->get('/admin/user/', 'App\Controllers\Admin\User::index');
-$routes->get('/admin/user/show/(:num)', 'App\Controllers\Admin\User::show/$1');
-$routes->get('/admin/user/edit/(:num)', 'App\Controllers\Admin\User::edit/$1');
-$routes->get('/admin/user/create', 'App\Controllers\Admin\User::create');
-$routes->post('/admin/user', 'App\Controllers\Admin\User::store');
-$routes->put('/admin/user', 'App\Controllers\Admin\User::update');
+$routes->get('/admin/user/', '\App\Controllers\Admin\User::index');
+$routes->get('/admin/user/show/(:num)', '\App\Controllers\Admin\User::show/$1');
+$routes->get('/admin/user/edit/(:num)', '\App\Controllers\Admin\User::edit/$1');
+$routes->get('/admin/user/create', '\App\Controllers\Admin\User::create');
+$routes->post('/admin/user', '\App\Controllers\Admin\User::store');
+$routes->put('/admin/user', '\App\Controllers\Admin\User::update');
 
-$routes->get('/admin/customer/', 'App\Controllers\Admin\Customer::index');
-$routes->get('/admin/customer/show/(:num)', 'App\Controllers\Admin\Customer::show/$1');
-$routes->get('/admin/customer/edit/(:num)', 'App\Controllers\Admin\Customer::edit/$1');
-$routes->get('/admin/customer/create', 'App\Controllers\Admin\Customer::create');
-$routes->post('/admin/customer', 'App\Controllers\Admin\Customer::store');
-$routes->put('/admin/customer', 'App\Controllers\Admin\Customer::update');
+$routes->get('/admin/customer/', '\App\Controllers\Admin\Customer::index');
+$routes->get('/admin/customer/show/(:num)', '\App\Controllers\Admin\Customer::show/$1');
+$routes->get('/admin/customer/edit/(:num)', '\App\Controllers\Admin\Customer::edit/$1');
+$routes->get('/admin/customer/create', '\App\Controllers\Admin\Customer::create');
+$routes->post('/admin/customer', '\App\Controllers\Admin\Customer::store');
+$routes->put('/admin/customer', '\App\Controllers\Admin\Customer::update');
 
-$routes->get('/admin/file/', 'App\Controllers\Admin\File::index');
-$routes->get('/admin/file/show/(:num)', 'App\Controllers\Admin\File::show/$1');
-$routes->get('/admin/file/edit/(:num)', 'App\Controllers\Admin\File::edit/$1');
-$routes->get('/admin/file/create', 'App\Controllers\Admin\File::create');
-$routes->get('/admin/file/download', 'App\Controllers\Admin\File::download');
-$routes->post('/admin/file', 'App\Controllers\Admin\File::store');
-$routes->post('/admin/file/update', 'App\Controllers\Admin\File::update');
+$routes->get('/admin/file/', '\App\Controllers\Admin\File::index');
+$routes->get('/admin/file/show/(:num)', '\App\Controllers\Admin\File::show/$1');
+$routes->get('/admin/file/edit/(:num)', '\App\Controllers\Admin\File::edit/$1');
+$routes->get('/admin/file/create', '\App\Controllers\Admin\File::create');
+$routes->get('/admin/file/download', '\App\Controllers\Admin\File::download');
+$routes->post('/admin/file', '\App\Controllers\Admin\File::store');
+$routes->post('/admin/file/update', '\App\Controllers\Admin\File::update');
 
 /**
  * CUSTOMER
