@@ -105,8 +105,8 @@ $routes->post('/admin/file/update', '\App\Controllers\Admin\File::update');
 /**
  * CUSTOMER
  */
-$routes->get('/customer/home/', 'App\Controllers\Customer\Home::index');
-$routes->get('/customer/download/(:num)', 'App\Controllers\Customer\Home::download/$1');
+$routes->get('/customer/home/', '\App\Controllers\Customer\Home::index');
+$routes->get('/customer/download/(:num)', '\App\Controllers\Customer\Home::download/$1');
 
 
 /**

@@ -16,7 +16,6 @@ class Home extends \App\Controllers\BaseController
         $this->session = \Config\Services::session();
         $this->CustomerModel = new CustomerModel();
         $this->FileModel = new \App\Models\FileModel();
-        \Security::customerAuth();
     }
 
     public function index()

@@ -12,7 +12,6 @@ class Customer extends \App\Controllers\BaseController
 
     public function __construct()
     {
-        \Security::auth();
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();
         $this->CustomerModel = new CustomerModel();

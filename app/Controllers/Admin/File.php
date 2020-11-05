@@ -13,7 +13,6 @@ class File extends \App\Controllers\BaseController
 
     public function __construct()
     {
-        \Security::auth();
         $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();
         $this->customerModel = new  \App\Models\CustomerModel();
