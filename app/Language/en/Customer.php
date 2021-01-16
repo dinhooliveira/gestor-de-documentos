@@ -18,5 +18,6 @@ return [
     'fieldName'=>'Name',
     'fieldConfEmail'=>'E-mail confirmation',
     'fieldCreatedAt'=>'Created at',
-    'fieldUpdatedAt'=>'Updated at'
+    'fieldUpdatedAt'=>'Updated at',
+    'totalCustomerHistory'=>'Total Download Cliente'
 ];

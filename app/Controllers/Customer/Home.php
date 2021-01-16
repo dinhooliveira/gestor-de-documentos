@@ -1,9 +1,12 @@
 <?php namespace App\Controllers\Customer;
 
 use App\Models\CustomerModel;
+use App\Traits\DownloadFile;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Home extends \App\Controllers\BaseController
 {
+    use DownloadFile;
 
     private $pearPage = 10;
     private $page = 1;
@@ -35,14 +38,20 @@ class Home extends \App\Controllers\BaseController
     }
 
     public function download($id){
+        $customerDownloadHistory = new \App\Models\CustomerDownloadHistoryModel();
         $fileRs =  $this->FileModel->find($id);
         $file_location = WRITEPATH."uploads/".$fileRs->file_location;
         $file = new \CodeIgniter\Files\File($file_location);
-        header("Content-disposition: attachment; filename={$fileRs->name}.{$file->getExtension()}");
-        header("Content-type: application/{$file->getExtension()}");
-        if($fileRs->customer_id ==$this->session->get('customer')->id){
-            readfile("{$file_location}");
+        if($fileRs->customer_id == $this->session->get('customer')->id){
+            $customerDownloadHistory->save([
+                'file_id'=> $fileRs->id,
+                'customer_id'=>$fileRs->customer_id
+            ]);
+            $this->downloadFile($fileRs->name,$file_location,$file->getExtension());
+            exit();
         }
+        
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Arquivo não encontrado!");
 
     }
 

@@ -11,6 +11,16 @@ class File extends Entity
         return $customer->find($this->customer_id);
     }
 
+    function userDownloadHistory(){
+        $userDownloadHistory = new  \App\Models\UserDownloadHistoryModel();
+        return $userDownloadHistory->where("file_id",$this->id)->findAll();
+    }
+
+    function customerDownloadHistory(){
+        $customerDownloadHistory = new  \App\Models\CustomerDownloadHistoryModel();
+        return $customerDownloadHistory->where("file_id",$this->id)->findAll();
+    }
+
     function user(){
         $user = new \App\Models\UserModel();
         return $user->find($this->user_id);

@@ -14,4 +14,8 @@ Run the <b>composer install</b> command. <br>
 Run the <b>php spark migrate</b> command  to generate the database tables.<br>
 
 Run the <b>php spark db: seed UserSeeder</b> command
-to create the master user
+to create the master user<br>
+
+<b>User: </b><i>admin@admin.com</i><br>
+<b>Password: </b><i>admin</i>
+

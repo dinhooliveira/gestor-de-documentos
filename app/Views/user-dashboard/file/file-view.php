@@ -26,6 +26,8 @@
     <strong><?= lang('File.fieldType') ?> : </strong><?=$fileRec->getExtension();?><br>
     <strong><?= lang('File.fieldCreatedAt') ?> : </strong><?=$file->getCreatedAt(getenv('app.defaultLocale'));?><br>
     <strong><?= lang('File.fieldUpdatedAt') ?> : </strong><?=$file->getUpdatedAt(getenv('app.defaultLocale'));?><br>
+    <strong><?= lang('File.totalUserHistory') ?> : </strong><?=count($file->userDownloadHistory());?><br>
+    <strong><?= lang('File.totalCustomerHistory') ?> : </strong><?=count($file->customerDownloadHistory());?><br>
 </fieldset>
 </body>
 </html>

@@ -1,9 +1,13 @@
-<?php namespace App\Controllers\Admin;
+<?php
+
+namespace App\Controllers\Admin;
 
 use App\Models\FileModel;
+use App\Traits\DownloadFile;
 
 class File extends \App\Controllers\BaseController
 {
+    use DownloadFile;
 
     private $pearPage = 10;
     private $page = 1;
@@ -24,7 +28,7 @@ class File extends \App\Controllers\BaseController
         $data['message'] = $this->session->getFlashdata('message') ?? $this->session->getFlashdata('message');
 
         $this->page = $this->request->getGet('page') ? $this->request->getGet('page') : $this->page;
-        $rs = $this->FileModel->getForPaginate($this->request->getGet('search'),$this->page, $this->pearPage);
+        $rs = $this->FileModel->getForPaginate($this->request->getGet('search'), $this->page, $this->pearPage);
         $data['files'] = $rs['data'];
         $pager = service('pager');
 
@@ -32,27 +36,26 @@ class File extends \App\Controllers\BaseController
         return view('user-dashboard/file/file-grid', $data);
     }
 
-    public function show($id=null){
+    public function show($id = null)
+    {
         try {
-            if(empty($id)){
+            if (empty($id)) {
                 throw new \Exception(lang('File.messageErroFileNotFoundId'));
             }
 
-           $file =  $this->FileModel->find($id);
-            if(empty($file)){
+            $file =  $this->FileModel->find($id);
+            if (empty($file)) {
                 throw new \Exception(lang('File.messageErroFileNotFound'));
             }
 
-            $file_location = WRITEPATH."uploads/".$file->file_location;
+            $file_location = WRITEPATH . "uploads/" . $file->file_location;
             $data['fileRec'] = new \CodeIgniter\Files\File($file_location);
             $data['file'] = $file;
 
-            return view('user-dashboard/file/file-view',$data);
-
-        }catch(\Exception $ex){
-            return redirect()->with('message',$ex->getMessage())->to('/admin/file');
+            return view('user-dashboard/file/file-view', $data);
+        } catch (\Exception $ex) {
+            return redirect()->with('message', $ex->getMessage())->to('/admin/file');
         }
-
     }
 
     public function create()
@@ -106,28 +109,24 @@ class File extends \App\Controllers\BaseController
             if (!$this->FileModel->save($file)) {
                 throw new \Exception(lang('File.messageSaveErro'));
             }
-            $message = lang('File.messageSave')."<br>";
+            $message = lang('File.messageSave') . "<br>";
 
             $result = redirect()->with('message', $message)->to('/admin/file/');
-
         } catch (\Exception $ex) {
             $result = redirect();
             switch ($ex->getCode()) {
-                case 97 :
+                case 97:
                     $result = $result->with('erros', $validation->getErrors());
                     break;
                 default:
                     $result = $result->with('erros', [$ex->getMessage()]);
                     break;
-
             }
 
             $result = $result->withInput()->to('/admin/file/create');
-
         }
 
         return $result;
-
     }
 
     public function update()
@@ -139,7 +138,7 @@ class File extends \App\Controllers\BaseController
         $validation->setRule('id', 'ID', 'required');
         $validation->setRule('name', lang('File.fieldName'), 'required');
         $validation->setRule('customer',  lang('File.fieldCustomer'), 'required');
-        if(!empty($this->request->getFile('file')->getName())){
+        if (!empty($this->request->getFile('file')->getName())) {
             $validation->setRule('file', lang('File.fieldFile'), 'uploaded[file]|max_size[file,5000]');
         }
 
@@ -165,11 +164,11 @@ class File extends \App\Controllers\BaseController
 
             $file->name = $this->request->getPost('name');
 
-            if(!empty($this->request->getFile('file')->getName())){
-                $file_location = WRITEPATH."uploads/".$file->file_location;
-                if(file_exists($file_location)){
-                    chmod($file_location,0777);//permission file
-                    unlink($file_location);//delete file
+            if (!empty($this->request->getFile('file')->getName())) {
+                $file_location = WRITEPATH . "uploads/" . $file->file_location;
+                if (file_exists($file_location)) {
+                    chmod($file_location, 0777); //permission file
+                    unlink($file_location); //delete file
                 }
                 $file->file_location = $this->request->getFile('file')->store('upload_files');
             }
@@ -184,39 +183,37 @@ class File extends \App\Controllers\BaseController
             $message = lang('File.messageUpdated');
 
             $result = redirect()->with('message', $message)->to('/admin/file/');
-
         } catch (\Exception $ex) {
             $result = redirect();
             switch ($ex->getCode()) {
-                case 97 :
+                case 97:
                     $result = $result->with('erros', $validation->getErrors());
                     break;
                 default:
                     $result = $result->with('erros', [$ex->getMessage()]);
                     break;
-
             }
 
             $result = $result->withInput()->to("/admin/file/edit/{$this->request->getPost("id")}");
-
         }
 
         return $result;
-
     }
 
     public function delete()
     {
-
     }
 
-    public function download($id){
+    public function download($id)
+    {
+        $userHistoryDownload   = new  \App\Models\UserDownloadHistoryModel();
         $fileRs =  $this->FileModel->find($id);
-        $file_location = WRITEPATH."uploads/".$fileRs->file_location;
+        $file_location = WRITEPATH . "uploads/" . $fileRs->file_location;
         $file = new \CodeIgniter\Files\File($file_location);
-        header("Content-disposition: attachment; filename={$fileRs->name}.{$file->getExtension()}");
-        header("Content-type: application/{$file->getExtension()}");
-        readfile("{$file_location}");
+        $userHistoryDownload->save([
+            'file_id' => $fileRs->id,
+            'user_id' => $this->session->get('user')->id
+        ]);
+        $this->downloadFile($fileRs->name, $file_location, $file->getExtension());
     }
-
 }

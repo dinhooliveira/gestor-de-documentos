@@ -23,4 +23,6 @@ return [
     'fieldType'=>'Tipo',
     'fieldCreatedAt'=>'Criando em',
     'fieldUpdatedAt'=>'Atualizado em',
+    'totalUserHistory'=>'Total Download Usuário',
+    'totalCustomerHistory'=>'Total Download Cliente'
 ];

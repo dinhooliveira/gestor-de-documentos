@@ -23,5 +23,7 @@ return [
     'fieldSize'=>'Size',
     'fieldType'=>'Type',
     'fieldCreatedAt'=>'Created at',
-    'fieldUpdatedAt'=>'Updated at'
+    'fieldUpdatedAt'=>'Updated at',
+    'totalUserHistory'=>'Total User Download',
+    'totalCustomerHistory'=>'Total Download Customer'
 ];
