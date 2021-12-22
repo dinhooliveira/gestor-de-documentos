@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity;
+use App\Libraries\Util;
 
 class User extends Entity
 {
@@ -30,11 +31,11 @@ class User extends Entity
     }
 
     function getCreatedAt($lang=null){
-        return  \Util::formatDate($lang,$this->attributes['created_at']);
+        return  Util::formatDate($lang,$this->attributes['created_at']);
     }
 
     function getUpdatedAt($lang=null){
-        return   \Util::formatDate($lang,$this->attributes['updated_at']);
+        return   Util::formatDate($lang,$this->attributes['updated_at']);
     }
 
 }

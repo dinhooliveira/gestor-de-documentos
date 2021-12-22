@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Libraries;
 
 class Util
 {
@@ -7,13 +8,14 @@ class Util
     /**
      * @param string $lang
      * @param $date
-     * @return DateTime|string
-     * @throws Exception
+     * @return \DateTime|string
+     * @throws \Exception
      */
-    static function formatDate($lang='es',$date){
+    static function formatDate($lang = 'es', $date)
+    {
 
         $dateFormat = new \DateTime($date);
-        switch ($lang){
+        switch ($lang) {
             case "pt-br":
                 $dateFormat = $dateFormat->format('d/m/Y H:i:s');
                 break;
