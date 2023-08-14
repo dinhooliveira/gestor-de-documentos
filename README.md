@@ -1,7 +1,7 @@
 <h1>SISYOURFILE</h1>
 <h3>REQUIRED<h3>
-php >=7.2<br>
-mysql >= 5.7<br>
+php ^7.4 || ^8.0 <br>
+mysql >= 8.0.33<br>
 composer<br>
 
 <h3>INSTALL</h3>
