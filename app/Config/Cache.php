@@ -1,5 +1,14 @@
-<?php namespace Config;
+<?php
 
+namespace Config;
+
+use CodeIgniter\Cache\CacheInterface;
+use CodeIgniter\Cache\Handlers\DummyHandler;
+use CodeIgniter\Cache\Handlers\FileHandler;
+use CodeIgniter\Cache\Handlers\MemcachedHandler;
+use CodeIgniter\Cache\Handlers\PredisHandler;
+use CodeIgniter\Cache\Handlers\RedisHandler;
+use CodeIgniter\Cache\Handlers\WincacheHandler;
 use CodeIgniter\Config\BaseConfig;
 
 class Cache extends BaseConfig

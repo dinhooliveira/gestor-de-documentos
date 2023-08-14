@@ -11,7 +11,7 @@ class Util
      * @return \DateTime|string
      * @throws \Exception
      */
-    static function formatDate($lang = 'es', $date)
+    static function formatDate(?String $lang, ?String $date)
     {
 
         $dateFormat = new \DateTime($date);

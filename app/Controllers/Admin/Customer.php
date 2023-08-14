@@ -1,6 +1,9 @@
-<?php namespace App\Controllers\Admin;
+<?php
+
+namespace App\Controllers\Admin;
 
 use App\Models\CustomerModel;
+use Config\Email;
 
 class Customer extends \App\Controllers\BaseController
 {
@@ -22,7 +25,7 @@ class Customer extends \App\Controllers\BaseController
         $data['message'] = $this->session->getFlashdata('message') ?? $this->session->getFlashdata('message');
 
         $this->page = $this->request->getGet('page') ? $this->request->getGet('page') : $this->page;
-        $rs = $this->CustomerModel->getForPaginate($this->request->getGet('search'),$this->page, $this->pearPage);
+        $rs = $this->CustomerModel->getForPaginate($this->request->getGet('search'), $this->page, $this->pearPage);
         $data['customers'] = $rs['data'];
         $pager = service('pager');
 
@@ -30,26 +33,24 @@ class Customer extends \App\Controllers\BaseController
         return view('user-dashboard/customer/customer-grid', $data);
     }
 
-    public function show($id=null){
+    public function show($id = null)
+    {
         try {
-            if(empty($id)){
+            if (empty($id)) {
                 throw new \Exception(lang('Customer.messageErroCustomerNotFoundId'));
             }
 
-           $customer =  $this->CustomerModel->find($id);
-            if(empty($customer)){
+            $customer =  $this->CustomerModel->find($id);
+            if (empty($customer)) {
                 throw new \Exception(lang('Customer.messageErroCustomerNotFound'));
             }
 
             $data['customer'] = $customer;
 
-            return view('user-dashboard/customer/customer-view',$data);
-
-
-        }catch(\Exception $ex){
-            return redirect()->with('message',$ex->getMessage())->to('/admin/customer');
+            return view('user-dashboard/customer/customer-view', $data);
+        } catch (\Exception $ex) {
+            return redirect()->with('message', $ex->getMessage())->to('/admin/customer');
         }
-
     }
 
     public function create()
@@ -103,7 +104,7 @@ class Customer extends \App\Controllers\BaseController
             if (!$this->CustomerModel->save($customer)) {
                 throw new \Exception(lang('Customer.messageSaveErro'));
             }
-            $message = lang('Customer.messageSave')."<br>";
+            $message = lang('Customer.messageSave') . "<br>";
             $email = \Config\Services::email();
             $email->setTo($this->request->getPost('email'));
             $email->setSubject(lang('Customer.registeredPassword'));
@@ -112,28 +113,25 @@ class Customer extends \App\Controllers\BaseController
 
             if (!$email->send()) {
                 $message .= lang('Customer.messageEmailRegistrationErro');
+                $message .= "Motivo: {$email->printDebugger()}";
             }
 
             $result = redirect()->with('message', $message)->to('/admin/customer/');
-
         } catch (\Exception $ex) {
             $result = redirect();
             switch ($ex->getCode()) {
-                case 97 :
+                case 97:
                     $result = $result->with('erros', $validation->getErrors());
                     break;
                 default:
                     $result = $result->with('erros', [$ex->getMessage()]);
                     break;
-
             }
 
             $result = $result->withInput()->to('/admin/customer/create');
-
         }
 
         return $result;
-
     }
 
     public function update()
@@ -179,30 +177,24 @@ class Customer extends \App\Controllers\BaseController
             $message = lang('Customer.messageUpdated');
 
             $result = redirect()->with('message', $message)->to('/admin/customer/');
-
         } catch (\Exception $ex) {
             $result = redirect();
             switch ($ex->getCode()) {
-                case 97 :
+                case 97:
                     $result = $result->with('erros', $validation->getErrors());
                     break;
                 default:
                     $result = $result->with('erros', [$ex->getMessage()]);
                     break;
-
             }
 
             $result = $result->withInput()->to("/admin/customer/edit/{$this->request->getPost("id")}");
-
         }
 
         return $result;
-
     }
 
     public function delete()
     {
-
     }
-
 }
