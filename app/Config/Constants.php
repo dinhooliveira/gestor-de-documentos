@@ -1,38 +1,36 @@
 <?php
 
-/*
- | --------------------------------------------------------------------
- | App Namespace
- | --------------------------------------------------------------------
- |
- | This defines the default Namespace that is used throughout
- | CodeIgniter to refer to the Application directory. Change
- | this constant to change the namespace that all application
- | classes should use.
- |
- | NOTE: changing this will require manually modifying the
- | existing namespaces of App\* namespaced-classes.
- */
+//--------------------------------------------------------------------
+// App Namespace
+//--------------------------------------------------------------------
+// This defines the default Namespace that is used throughout
+// CodeIgniter to refer to the Application directory. Change
+// this constant to change the namespace that all application
+// classes should use.
+//
+// NOTE: changing this will require manually modifying the
+// existing namespaces of App\* namespaced-classes.
+//
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
 
 /*
- | --------------------------------------------------------------------------
- | Composer Path
- | --------------------------------------------------------------------------
- |
- | The path that Composer's autoload file is expected to live. By default,
- | the vendor folder is in the Root directory, but you can customize that here.
- */
+|--------------------------------------------------------------------------
+| Composer Path
+|--------------------------------------------------------------------------
+|
+| The path that Composer's autoload file is expected to live. By default,
+| the vendor folder is in the Root directory, but you can customize that here.
+*/
 defined('COMPOSER_PATH') || define('COMPOSER_PATH', ROOTPATH . 'vendor/autoload.php');
 
 /*
- |--------------------------------------------------------------------------
- | Timing Constants
- |--------------------------------------------------------------------------
- |
- | Provide simple ways to work with the myriad of PHP functions that
- | require information to be in seconds.
- */
+|--------------------------------------------------------------------------
+| Timing Constants
+|--------------------------------------------------------------------------
+|
+| Provide simple ways to work with the myriad of PHP functions that
+| require information to be in seconds.
+*/
 defined('SECOND') || define('SECOND', 1);
 defined('MINUTE') || define('MINUTE', 60);
 defined('HOUR')   || define('HOUR', 3600);

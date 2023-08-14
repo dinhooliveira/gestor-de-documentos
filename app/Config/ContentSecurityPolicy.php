@@ -5,6 +5,8 @@ namespace Config;
 use CodeIgniter\Config\BaseConfig;
 
 /**
+ * Class ContentSecurityPolicyConfig
+ *
  * Stores the default settings for the ContentSecurityPolicy, if you
  * choose to use it. The values here will be read in and set as defaults
  * for the site. If needed, they can be overridden on a page-by-page basis.
