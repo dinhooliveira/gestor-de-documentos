@@ -5,10 +5,10 @@ use App\Models\UserModel;
 class User extends \App\Controllers\BaseController
 {
 
-    private $pearPage = 10;
-    private $page = 1;
-    protected $UserModel;
-    protected $session;
+    private int $pearPage = 10;
+    private int $page = 1;
+    protected UserModel $UserModel;
+    protected \CodeIgniter\Session\Session $session;
 
     public function __construct()
     {
@@ -16,7 +16,7 @@ class User extends \App\Controllers\BaseController
         $this->UserModel = new UserModel();
     }
 
-    public function index()
+    public function index(): string
     {
         $data['message'] = $this->session->getFlashdata('message') ?? $this->session->getFlashdata('message');
 
@@ -43,7 +43,7 @@ class User extends \App\Controllers\BaseController
 
             $data['user'] = $user;
 
-            return view('user-dashboard/user/user-view',$data);
+            return view('user-dashboard/user/user-show',$data);
 
 
         }catch(\Exception $ex){
@@ -52,7 +52,7 @@ class User extends \App\Controllers\BaseController
 
     }
 
-    public function create()
+    public function create(): string
     {
 
         $data = [];
@@ -136,7 +136,7 @@ class User extends \App\Controllers\BaseController
 
     }
 
-    public function update()
+    public function update(): \CodeIgniter\HTTP\RedirectResponse
     {
 
         helper(['url']);

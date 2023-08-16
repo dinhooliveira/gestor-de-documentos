@@ -8,10 +8,10 @@ use Config\Email;
 class Customer extends \App\Controllers\BaseController
 {
 
-    private $pearPage = 10;
-    private $page = 1;
-    protected $CustomerModel;
-    protected $session;
+    private int $pearPage = 10;
+    private int $page = 1;
+    protected CustomerModel $CustomerModel;
+    protected \CodeIgniter\Session\Session $session;
 
     public function __construct()
     {
@@ -47,7 +47,7 @@ class Customer extends \App\Controllers\BaseController
 
             $data['customer'] = $customer;
 
-            return view('user-dashboard/customer/customer-view', $data);
+            return view('user-dashboard/customer/customer-show', $data);
         } catch (\Exception $ex) {
             return redirect()->with('message', $ex->getMessage())->to('/admin/customer');
         }
