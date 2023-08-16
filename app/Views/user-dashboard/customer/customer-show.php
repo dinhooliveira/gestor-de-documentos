@@ -1,4 +1,4 @@
-<?= $this->extend("layouts/layout-user") ?>
+<?= $this->extend("layouts/layout") ?>
 
 <?= $this->section("title") ?>
 <?= lang('Customer.title') ?>

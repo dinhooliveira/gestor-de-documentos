@@ -1,30 +1,22 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <link rel="stylesheet" href="<?= base_url('/css/grid.css') ?>" />
-    <meta charset="utf-8">
-</head>
+use App\Libraries\Util;
 
-<body>
-<h1 class="title-page">
-    <?= lang('File.title') ?>
-</h1>
-<a class="btn-logout" href="<?= base_url('/CustomerLogin/logout') ?>">
-    <img src="<?= base_url('/icons/off.png') ?>" />
-</a>
-<div class="container">
-    <?php if (!empty($message)) : ?>
-        <div class="message-info">
-            <?= $message ?>
-        </div>
-    <?php endif; ?>
-    <form method="get" class="form-search">
-        <input name="search" value="<?= empty($_GET['search']) ? '' : $_GET['search'] ?>">
-        <button><img src="<?= base_url('/icons/search.png') ?>" /></button>
+?>
+<?= $this->extend("layouts/layout") ?>
+<?= $this->section("title") ?>
+Home
+<?= $this->endSection("title") ?>
+<?= $this->section("content") ?>
+<div class="actions-bar">
+    <form method="get"
+          class="form-search">
+        <input name="search"
+               value="<?= empty($_GET['search']) ? '' : $_GET['search'] ?>">
+        <button><img src="<?= base_url('/icons/search.png') ?>"/></button>
     </form>
-
+</div>
+<div class="container-table">
     <table>
         <thead>
         <tr>
@@ -51,10 +43,13 @@
                     <td><?= $file->name ?></td>
                     <td><?= $fileRec ? $fileRec->getExtension() : '' ?></td>
                     <td><?= $fileRec ? $fileRec->getSize('MB') : '' ?>(MB)</td>
-                    <td><?= \App\Libraries\Util::formatDate(getenv('app.defaultLocale'), $file->created_at) ?></td>
-                    <td><?= \App\Libraries\Util::formatDate(getenv('app.defaultLocale'), $file->updated_at) ?></td>
+                    <td><?= Util::formatDate(getenv('app.defaultLocale'), $file->created_at) ?></td>
+                    <td><?= Util::formatDate(getenv('app.defaultLocale'), $file->updated_at) ?></td>
                     <td>
-                        <a class="btn-action" href="<?= base_url("/customer/download/{$file->id}") ?>"><img src="<?= base_url('icons/download.png') ?>" /></a>
+                        <div class="table-action">
+                            <a class="btn-action"
+                               href="<?= base_url("/customer/download/{$file->id}") ?>"><img src="<?= base_url('icons/download.png') ?>"/></a>
+                        </div>
                     </td>
                 </tr>
             <?php
@@ -65,7 +60,5 @@
     </table>
     <?= $links ?>
 </div>
-<script src="<?= base_url('js/message.js') ?>"></script>
-</body>
+<?= $this->endsection("content") ?>
 
-</html>
