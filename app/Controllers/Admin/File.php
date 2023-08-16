@@ -9,11 +9,11 @@ class File extends \App\Controllers\BaseController
 {
     use DownloadFile;
 
-    private $pearPage = 10;
-    private $page = 1;
-    protected $FileModel;
-    protected $session;
-    protected $customerModel;
+    private int $pearPage = 10;
+    private int $page = 1;
+    protected FileModel $FileModel;
+    protected \CodeIgniter\Session\Session $session;
+    protected \App\Models\CustomerModel $customerModel;
 
     public function __construct()
     {
@@ -23,7 +23,7 @@ class File extends \App\Controllers\BaseController
         $this->FileModel = new FileModel();
     }
 
-    public function index()
+    public function index(): string
     {
         $data['message'] = $this->session->getFlashdata('message') ?? $this->session->getFlashdata('message');
 
@@ -43,7 +43,7 @@ class File extends \App\Controllers\BaseController
                 throw new \Exception(lang('File.messageErroFileNotFoundId'));
             }
 
-            $file =  $this->FileModel->find($id);
+            $file = $this->FileModel->find($id);
             if (empty($file)) {
                 throw new \Exception(lang('File.messageErroFileNotFound'));
             }
@@ -52,13 +52,13 @@ class File extends \App\Controllers\BaseController
             $data['fileRec'] = new \CodeIgniter\Files\File($file_location);
             $data['file'] = $file;
 
-            return view('user-dashboard/file/file-view', $data);
+            return view('user-dashboard/file/file-show', $data);
         } catch (\Exception $ex) {
             return redirect()->with('message', $ex->getMessage())->to('/admin/file');
         }
     }
 
-    public function create()
+    public function create(): string
     {
 
         $data = [];
@@ -85,14 +85,14 @@ class File extends \App\Controllers\BaseController
         return view('user-dashboard/file/form-edit', $data);
     }
 
-    public function store()
+    public function store(): \CodeIgniter\HTTP\RedirectResponse
     {
 
         helper(['url']);
         $validation = \Config\Services::validation();
         $validation->setRule('file', lang('File.fieldFile'), 'uploaded[file]|max_size[file,5000]');
         $validation->setRule('name', lang('File.fieldName'), 'required');
-        $validation->setRule('customer',  lang('File.fieldCustomer'), 'required');
+        $validation->setRule('customer', lang('File.fieldCustomer'), 'required');
         try {
 
             if (!$validation->withRequest($this->request)->run()) {
@@ -100,7 +100,7 @@ class File extends \App\Controllers\BaseController
             }
 
             $file = $this->request->getFile('file');
-            $path =  $file->store('upload_files');
+            $path = $file->store('upload_files');
             $file = new \App\Entities\File();
             $file->name = $this->request->getPost('name');
             $file->file_location = $path;
@@ -129,7 +129,7 @@ class File extends \App\Controllers\BaseController
         return $result;
     }
 
-    public function update()
+    public function update(): \CodeIgniter\HTTP\RedirectResponse
     {
 
         helper(['url']);
@@ -137,7 +137,7 @@ class File extends \App\Controllers\BaseController
 
         $validation->setRule('id', 'ID', 'required');
         $validation->setRule('name', lang('File.fieldName'), 'required');
-        $validation->setRule('customer',  lang('File.fieldCustomer'), 'required');
+        $validation->setRule('customer', lang('File.fieldCustomer'), 'required');
         if (!empty($this->request->getFile('file')->getName())) {
             $validation->setRule('file', lang('File.fieldFile'), 'uploaded[file]|max_size[file,5000]');
         }
@@ -206,8 +206,8 @@ class File extends \App\Controllers\BaseController
 
     public function download($id)
     {
-        $userHistoryDownload   = new  \App\Models\UserDownloadHistoryModel();
-        $fileRs =  $this->FileModel->find($id);
+        $userHistoryDownload = new  \App\Models\UserDownloadHistoryModel();
+        $fileRs = $this->FileModel->find($id);
         $file_location = WRITEPATH . "uploads/" . $fileRs->file_location;
         $file = new \CodeIgniter\Files\File($file_location);
         $userHistoryDownload->save([
