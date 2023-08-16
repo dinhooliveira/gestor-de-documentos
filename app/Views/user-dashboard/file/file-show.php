@@ -7,7 +7,7 @@
 <?= lang('File.title') ?>
 <?= $this->endSection('titlePage') ?>
 <?= $this->section("content") ?>
-<fieldset class="show">
+<fieldset class="show-fieldset">
     <legend><?= lang('File.title') ?></legend>
     <strong><?= lang('File.fieldName') ?>:</strong><?= $file->name; ?><br>
     <strong><?= lang('File.fieldCustomer') ?>: </strong><?= $file->customer()->name; ?><br>

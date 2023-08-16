@@ -247,12 +247,61 @@ li.active {
     font-size: 70px;
 }
 
-.show fieldset{
+.show-fieldset{
     margin: 90px;
     color: #fff;
     font-size: 25px;
 }
 
-.show strong{
+.show-fieldset strong{
     color:#000;
 }
+
+
+
+
+/**
+  form
+ */
+
+.form{
+    width: 300px;
+    margin: auto;
+    color:white;
+    margin-top:5%;
+}
+
+.form legend{
+    font-size: 30px;
+}
+
+.form input,button,select{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 15px;
+    font-size: 19px;
+    outline: none;
+}
+
+.button-send{
+    background: #01017d;
+    color:#fff;
+    border:none;
+    height: auto;
+}
+
+.button-send img{
+    width: 30px;
+}
+
+.form fieldset input:hover,button:hover,select:hover{
+    box-shadow: 0 0 15px 1px #31708f;
+}
+
+.message-error{
+    color:white;
+    background: #691300;
+    border-radius: 5px;
+    padding: 10px;
+}
+

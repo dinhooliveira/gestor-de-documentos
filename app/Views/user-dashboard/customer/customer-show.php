@@ -7,7 +7,7 @@
 <?= lang('Customer.title') ?>
 <?= $this->endSection('titlePage') ?>
 <?= $this->section("content") ?>
-<fieldset class="show">
+<fieldset class="show-fieldset">
     <legend><?= lang('Customer.title') ?></legend>
     <strong><?= lang('Customer.fieldName') ?>: </strong><?= $customer->name ?><br>
     <strong>E-mail : </strong><?= $customer->email ?><br>
